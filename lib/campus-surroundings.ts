@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import {clipSubmergedTerrain} from './terrain-water-clip';
+import {treeBaseHeight} from './campus-model';
 export type RegionalTerrain={xMin:number;xMax:number;zMin:number;zMax:number;rows:number;cols:number;heights:number[][]};
 export function sampleRegionalHeight(data:RegionalTerrain,x:number,z:number){
  const u=THREE.MathUtils.clamp((x-data.xMin)/(data.xMax-data.xMin)*(data.cols-1),0,data.cols-1.000001);
@@ -75,7 +76,7 @@ export function createCampusSurroundings(data:RegionalTerrain,campus:{root:THREE
   if(d<=0||d>500||random()>(.80-.60*THREE.MathUtils.smoothstep(d,250,1400)))continue;
   const h=heightAt(x,z);if(h<45)continue;
   const slope=Math.hypot(renderedHeight(x+20,z)-renderedHeight(x-20,z),renderedHeight(x,z+20)-renderedHeight(x,z-20))/40;
-  if(slope>.9)continue;treePoints.push(new THREE.Vector3(x,h,z));
+  if(slope>.9)continue;treePoints.push(new THREE.Vector3(x,treeBaseHeight(heightAt,x,z),z));
  }
  if(sourceLeaves&&sourceTrunks&&treePoints.length){
   const contextCrown=new THREE.IcosahedronGeometry(1,1);contextCrown.scale(1,.82,1);

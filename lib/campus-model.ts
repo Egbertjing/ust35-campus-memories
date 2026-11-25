@@ -163,6 +163,12 @@ export type CampusTextures = {
   window?: THREE.Texture;
   grass?: THREE.Texture;
 };
+/** Lowest rendered ground under a tree trunk footprint, sunk 0.4 m so trunks never float on slopes. */
+export function treeBaseHeight(ground:(x:number,z:number)=>number,x:number,z:number,radius=1){
+  let h=ground(x,z);
+  for(const [dx,dz] of [[radius,0],[-radius,0],[0,radius],[0,-radius]])h=Math.min(h,ground(x+dx,z+dz));
+  return h-0.4;
+}
 export function buildCampus(
   data: CampusData,
   dem: TerrainData,
@@ -1107,8 +1113,10 @@ export function buildCampus(
     )
       continue;
     if (nearRoad(x, z)) continue;
-    const y = heightAt(x, z);
-    if (y < 3) continue;
+    if (heightAt(x, z) < 3) continue;
+    // Seat each tree on the rendered (tessellated) ground, at the lowest point under its trunk,
+    // and sink it slightly, so no tree hovers on slopes or terrace edges.
+    const y = treeBaseHeight(renderedGroundHeight, x, z);
     treePositions.push(new THREE.Vector3(x, y, z));
   }
   // One shared, gently lobed crown keeps instancing efficient without balloon-like trees.
