@@ -579,6 +579,7 @@ export default function Home() {
             {t('照片与地图参考 · 概念级重建 · 彩色贴图')}
           </div>
           <a className="terrain-source" href="https://registry.opendata.aws/terrain-tiles/" target="_blank" rel="noreferrer">Regional terrain · Mapzen / USGS / NOAA · 100 m context</a>
+          <a className="terrain-source" href="https://open-meteo.com/" target="_blank" rel="noreferrer">Live weather · Open-Meteo.com (CC BY 4.0)</a>
         </aside>
 
         <div

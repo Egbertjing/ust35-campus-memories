@@ -2111,3 +2111,24 @@ a {
 @media(min-width:901px){.memory-tour-story{width:380px}.memory-tour-story img{max-height:240px;object-fit:cover;width:100%}}
 /* Map labels can extend past the viewport; clip (not hidden) so focus/scrollIntoView can never shift the whole app sideways */
 .campus-app,.scene-shell{overflow:clip!important}
+
+/* ── Live weather badge + menu (2026-11-25) ─────────────────────────────── */
+.campus-weather-badge{display:flex;align-items:center;gap:6px;margin-left:12px;padding-left:12px;border-left:1px solid #84c9c733;font-size:11px;color:#bcd9e2;white-space:nowrap}
+.campus-weather-badge svg{color:#9fe9da;flex:none}
+.campus-weather-badge b{font-size:13px;font-weight:650;color:#eafffa;font-variant-numeric:tabular-nums}
+.campus-weather-badge.is-preview svg{color:#f0b860}
+.campus-lighting-control select.campus-weather-select{margin-left:0;max-width:128px}
+@media(max-width:1100px){.campus-weather-badge>span{display:none}}
+@media(max-width:600px){
+ .campus-weather-badge{margin-left:8px;padding-left:8px;gap:4px}
+ .campus-lighting-control select.campus-weather-select{max-width:64px}
+ .campus-lighting-control select{margin-left:6px}
+}
+@media(max-width:420px){
+ .app-header{gap:8px!important}
+ .campus-lighting-control{padding:0 2px 0 8px!important}
+ .campus-live-clock{gap:5px}.campus-live-clock>i{width:6px;height:6px}.campus-live-clock>b{font-size:12px}
+ .campus-weather-badge{margin-left:6px;padding-left:6px;gap:3px}.campus-weather-badge b{font-size:12px}
+ .campus-lighting-control select{margin-left:4px!important;padding:0 2px 0 6px!important;font-size:11px!important}
+ .campus-lighting-control select.campus-weather-select{max-width:46px}
+}

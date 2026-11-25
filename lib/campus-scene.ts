@@ -264,7 +264,7 @@ export async function createCampusScene(
   sea.position.y = 0;
   sea.name = 'Port_Shelter';
   scene.add(sea);
-  const lighting=createCampusLighting({scene,camera,renderer,sun,hemisphere,sea:seaMaterial,root:campus.root,invalidate});
+  const lighting=createCampusLighting({scene,camera,renderer,sun,hemisphere,sea:seaMaterial,root:campus.root,invalidate,onAmbientFps:fps=>renderLoop?.setIdleFrameRate(reduced?0:fps)});
   scene.add(createCampusShoreline(data.coastline.map(feature=>feature.points),seaMaterial.uniforms.uTime));
   const seaLabel = createSeaLabel();
   scene.add(seaLabel);
@@ -1096,7 +1096,7 @@ export async function createCampusScene(
     },
   };
   renderLoop = createDemandRenderLoop(draw);
-  renderLoop.setIdleFrameRate(reduced ? 0 : 2);
+  renderLoop.setIdleFrameRate(reduced ? 0 : lighting.ambientFps());
   document.addEventListener('visibilitychange', visibilityChanged);
   visibilityChanged();
   invalidate();
