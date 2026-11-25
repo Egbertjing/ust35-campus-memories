@@ -16,6 +16,9 @@ export function createCampusLighting({scene,camera,renderer,sun,hemisphere,sea,r
  const windowMaterials=new Map<THREE.MeshStandardMaterial,{color:THREE.Color;intensity:number}>();
  root.traverse(o=>{if(!(o instanceof THREE.Mesh))return;for(const m of Array.isArray(o.material)?o.material:[o.material])if(m instanceof THREE.MeshStandardMaterial&&(/window|glazing/i.test(m.name)||o.name==='Facade_windows_approximate'))windowMaterials.set(m,{color:m.emissive.clone(),intensity:m.emissiveIntensity});});
  const occupancy=applyWindowLighting(root,[...windowMaterials.keys()]);
+ // Line materials (campus boundary, roof outlines) are unlit, so dim them with daylight or they glow at night.
+ const lineMaterials=new Map<THREE.LineBasicMaterial,{color:THREE.Color;opacity:number}>();
+ root.traverse(o=>{if(!(o instanceof THREE.Line))return;for(const m of Array.isArray(o.material)?o.material:[o.material])if(m instanceof THREE.LineBasicMaterial&&!lineMaterials.has(m)){lineMaterials.set(m,{color:m.color.clone(),opacity:m.opacity});m.transparent=true;}});
  const mix=(a:string,b:string,t:number)=>new THREE.Color(a).lerp(new THREE.Color(b),t);
  function update(forceShadow=false){
   const now=new Date(),live=campusSunPosition(now);occupancy.update(reduceCloudMotion?0:(performance.now()-cloudEpoch)/1000,now);
@@ -36,6 +39,7 @@ export function createCampusLighting({scene,camera,renderer,sun,hemisphere,sea,r
   hemisphere.color.copy(mix('#7c9fcf','#e6f0fa',daylight));hemisphere.groundColor.copy(mix('#26384e','#69776a',daylight));hemisphere.intensity=.55+daylight*1.25;
   sea.uniforms.uColor.value.copy(mix('#09192c','#377f96',daylight).lerp(new THREE.Color('#9a7d83'),gold*daylight*.24));sea.uniforms.uHorizon.value.copy(horizon);sea.uniforms.uSunDir.value.copy(direction);sea.uniforms.uSunColor.value.copy(sun.color);sea.uniforms.uSunStrength.value=THREE.MathUtils.smoothstep(position.elevation,-2,8);sea.uniforms.uWaterLight.value=.08+.92*daylight;
   renderer.toneMappingExposure=1.1;
+  for(const [m,original] of lineMaterials){m.color.copy(original.color).multiplyScalar(.22+.78*daylight);m.opacity=original.opacity*(.35+.65*daylight);}
   for(const [m,original] of windowMaterials){m.emissive.copy(original.color).lerp(new THREE.Color('#ffe4b8'),1-daylight);m.emissiveIntensity=original.intensity*daylight+(1-daylight)*.34;}
   const time=clockFormat.format(now);
   window.dispatchEvent(new CustomEvent('campus-lighting-status',{detail:{mode,phase:position.phase,time}}));invalidate();
