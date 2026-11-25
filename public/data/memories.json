@@ -1,0 +1,51 @@
+[
+ {
+  "id": "233d9baf-5207-4979-88c3-b5f58c9dd87a",
+  "title": "日晷广场",
+  "story": "",
+  "date": "",
+  "point": {
+   "x": -206.64145166806745,
+   "y": 130.3555450439453,
+   "z": -271.0417787089608,
+   "name": "日晷广场 · 自选机位"
+  },
+  "photo": "memories/233d9baf-5207-4979-88c3-b5f58c9dd87a.png"
+ },
+ {
+  "id": "e27e986d-dc91-454b-9d11-30be30299817",
+  "title": "Example · Bridge Link LG5",
+  "story": "A screenshot of the conceptual 3D campus, demonstrating the photo-location feature. This is not a real photograph. Add your own campus photos nearby.",
+  "date": "",
+  "point": {
+   "x": 8,
+   "y": 103,
+   "z": -278
+  },
+  "photo": "memories/e27e986d-dc91-454b-9d11-30be30299817.jpg"
+ },
+ {
+  "id": "6830b43b-c86e-46f5-abf6-fa15d45a8278",
+  "title": "Example · Waterfront Sports Ground",
+  "story": "A screenshot of the conceptual 3D campus, demonstrating the photo-location feature. This is not a real photograph. Add your own campus photos nearby.",
+  "date": "",
+  "point": {
+   "x": 275,
+   "y": 25,
+   "z": -278
+  },
+  "photo": "memories/6830b43b-c86e-46f5-abf6-fa15d45a8278.jpg"
+ },
+ {
+  "id": "7c7758b5-7b11-4fcb-ac39-b6a34d75733d",
+  "title": "Example · Sundial Piazza",
+  "story": "A screenshot of the conceptual 3D campus, demonstrating the photo-location feature. This is not a real photograph. Add your own campus photos nearby.",
+  "date": "",
+  "point": {
+   "x": -192.9,
+   "y": 130.4,
+   "z": -280.8
+  },
+  "photo": "memories/7c7758b5-7b11-4fcb-ac39-b6a34d75733d.jpg"
+ }
+]
