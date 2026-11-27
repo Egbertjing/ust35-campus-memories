@@ -2132,3 +2132,31 @@ a {
  .campus-lighting-control select{margin-left:4px!important;padding:0 2px 0 6px!important;font-size:11px!important}
  .campus-lighting-control select.campus-weather-select{max-width:46px}
 }
+
+/* ── Call for photos: Add button + welcome card (2026-11-27) ─────────────── */
+.memory-add-cta{position:fixed;z-index:46;left:50%;bottom:98px;transform:translateX(-50%);display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 26px 0 18px;border:0;border-radius:999px;background:linear-gradient(135deg,#8af2d8,#5cc9e0);color:#062433;font-size:16px;font-weight:750;letter-spacing:.01em;box-shadow:0 12px 32px #00182966,0 0 0 4px #8af2d826;cursor:pointer;white-space:nowrap;transition:transform .18s ease,box-shadow .18s ease;animation:ust-cta-glow 3.2s ease-in-out infinite}
+.memory-add-cta>span{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#062433;color:#8af2d8;font-size:18px}
+.memory-add-cta:hover:not(:disabled){transform:translateX(-50%) translateY(-2px);box-shadow:0 16px 40px #00182988,0 0 0 6px #8af2d833}
+.memory-add-cta:focus-visible{outline:3px solid #eafffa;outline-offset:3px}
+.memory-add-cta:disabled{opacity:.55;cursor:default;animation:none}
+@keyframes ust-cta-glow{50%{box-shadow:0 12px 32px #00182966,0 0 0 9px #8af2d800}}
+.memory-touring .memory-add-cta,.review-picking .memory-add-cta{display:none!important}
+.memory-welcome{width:min(440px,calc(100vw - 32px));padding:28px 28px 22px;border:1px solid #8af2d855;border-radius:22px;background:linear-gradient(155deg,#10304af7,#071b2cf7);color:#e6f6f9;box-shadow:0 30px 90px #000a}
+.memory-welcome::backdrop{background:#020b14a6;backdrop-filter:blur(3px)}
+.memory-welcome>small{display:block;font-size:11px;letter-spacing:.14em;color:#8af2d8;text-transform:uppercase}
+.memory-welcome h2{margin:8px 0 10px;font-size:28px;line-height:1.15;color:#fff}
+.memory-welcome p{margin:0 0 16px;font-size:14px;line-height:1.6;color:#b8d3dc}
+.memory-welcome ol{display:grid;gap:8px;margin:0 0 20px;padding:0;list-style:none}
+.memory-welcome li{display:flex;align-items:center;gap:10px;font-size:14px;color:#e6f6f9}
+.memory-welcome li b{display:grid;place-items:center;flex:none;width:24px;height:24px;border-radius:50%;background:#8af2d82b;color:#8af2d8;font-size:12px}
+.memory-welcome .memory-primary{display:block;width:100%;height:50px;font-size:16px}
+.memory-welcome-skip{display:block;width:100%;margin-top:10px;padding:10px;border-radius:12px;background:transparent;border:1px solid #ffffff26;color:#cfe6ee;font-size:14px;cursor:pointer}
+.memory-welcome-skip:hover{background:#ffffff0d}
+.memory-welcome-note{display:block;margin-top:14px;text-align:center;font-size:11px;color:#7f9faf}
+@media(max-width:600px){.memory-add-cta{bottom:92px;height:48px;font-size:15px;padding:0 22px 0 14px}.memory-welcome{padding:22px 20px 18px}.memory-welcome h2{font-size:24px}}
+@media(prefers-reduced-motion:reduce){.memory-add-cta{animation:none;transition:none}}
+.memory-welcome[open]{position:fixed;inset:0;margin:auto;height:fit-content;max-height:calc(100dvh - 32px);overflow:auto}
+.memory-welcome>small.memory-welcome-note{text-transform:none;letter-spacing:.01em;color:#7f9faf}
+
+a.memory-add-cta{text-decoration:none}
+.memory-welcome a.memory-welcome-go{display:flex;align-items:center;justify-content:center;width:100%;height:50px;border-radius:14px;text-decoration:none;font-size:16px;font-weight:700;color:#062433;background:linear-gradient(135deg,#8af2d8,#5cc9e0);box-sizing:border-box}
