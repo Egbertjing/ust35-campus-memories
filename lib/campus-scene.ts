@@ -1046,7 +1046,7 @@ export async function createCampusScene(
       invalidate();
     },
     async download() {
-      const response = await fetch(asset('/hkust-clear-water-bay.glb'));
+      const response = await fetch(import.meta.env.VITE_MODEL_URL || asset('/hkust-clear-water-bay.glb'));
       if (!response.ok) throw new Error('Model download failed');
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);

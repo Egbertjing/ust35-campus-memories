@@ -2112,6 +2112,39 @@ a {
 /* Map labels can extend past the viewport; clip (not hidden) so focus/scrollIntoView can never shift the whole app sideways */
 .campus-app,.scene-shell{overflow:clip!important}
 
+/* ── Add-photo form (2026-11-25, pass 3) ────────────────────────────────── */
+.memory-panel:has(.memory-compose) header h2,.memory-panel:has(.memory-compose) header p{display:none}
+.memory-panel:has(.memory-compose) header{padding-bottom:10px!important;margin-bottom:12px!important}
+.memory-compose .compose-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.memory-compose .memory-back-link{display:inline-flex;align-items:center;margin:0;padding:6px 10px 6px 8px;border-radius:9px;background:#ffffff0a;border:1px solid #ffffff18;color:#bfe9e1;font-size:13px;text-decoration:none!important}
+.compose-steps{display:flex;gap:6px;margin:0;padding:0;list-style:none;counter-reset:step}
+.compose-steps li{counter-increment:step;display:flex;align-items:center;gap:6px;font-size:11px;color:#8fb6c5;white-space:nowrap}
+.compose-steps li:before{content:counter(step);display:grid;place-items:center;width:18px;height:18px;border-radius:50%;border:1px solid #8fb6c566;font-size:10px}
+.compose-steps li.done:before{content:'✓';background:#75dccb33;border-color:#75dccb;color:#a8f5e6}
+.compose-steps li.current{color:#eafffa;font-weight:600}.compose-steps li.current:before{background:#75dccb;border-color:#75dccb;color:#0b2a37}
+.compose-steps li+li{padding-left:6px;border-left:1px solid #ffffff1f}
+.compose-place{display:grid;grid-template-columns:30px 1fr auto;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:#ffffff08;border:1px solid #ffffff16;margin-bottom:14px}
+.compose-place>span{display:grid;place-items:center;width:30px;height:30px;border-radius:9px;background:#75dccb22;color:#8af2d8}
+.compose-place small{display:block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#8fb6c5}
+.compose-place strong{display:block;font-size:14px;line-height:1.3;color:#eafffa;overflow-wrap:anywhere}
+.compose-place button{padding:7px 12px;border-radius:9px;background:#ffffff0d;border:1px solid #ffffff24;color:#d8eef2;font-size:12px}
+.compose-place button:hover{background:#75dccb22}
+.memory-compose .compose-drop{position:relative;display:grid!important;place-items:center;min-height:170px;margin:0 0 6px!important;padding:0!important;border:1.5px dashed #75dccb66!important;border-radius:14px!important;background:#75dccb0d;cursor:pointer;overflow:hidden;transition:border-color .18s,background .18s}
+.memory-compose .compose-drop:hover,.memory-compose .compose-drop.is-dragging{border-color:#8af2d8!important;background:#75dccb1f}
+.memory-compose .compose-drop.has-photo{border-style:solid!important;background:#04121f}
+.memory-compose .compose-drop input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.compose-drop img{display:block;width:100%;max-height:260px;object-fit:contain}
+.compose-drop-empty{display:grid;justify-items:center;gap:4px;padding:22px;text-align:center;pointer-events:none}
+.compose-drop-empty b{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#75dccb;color:#0b2a37;font-size:22px;margin-bottom:6px}
+.compose-drop-empty strong{font-size:15px;color:#eafffa}.compose-drop-empty small{font-size:12px;color:#9fc0cc}
+.compose-drop-change{position:absolute;right:10px;bottom:10px;padding:6px 10px;border-radius:8px;background:#061323d9;border:1px solid #ffffff33;color:#fff;font-size:12px;pointer-events:none}
+.compose-file{display:block;margin-bottom:6px;font-size:11px;color:#8fb6c5;overflow-wrap:anywhere}
+.memory-compose fieldset>label{margin:14px 0!important;font-size:13px;color:#cfe6ee}
+.memory-compose label em{font-style:normal;font-size:11px;color:#8fb6c5;margin-left:4px}
+.memory-compose input[type=date]{color-scheme:dark}
+.memory-compose .compose-count{display:block;text-align:right;font-size:11px;color:#7f9faf;margin-top:4px}
+@media(max-width:600px){.compose-steps li{font-size:10px}.memory-compose .compose-drop{min-height:140px}}
+
 /* ── Live weather badge + menu (2026-11-25) ─────────────────────────────── */
 .campus-weather-badge{display:flex;align-items:center;gap:6px;margin-left:12px;padding-left:12px;border-left:1px solid #84c9c733;font-size:11px;color:#bcd9e2;white-space:nowrap}
 .campus-weather-badge svg{color:#9fe9da;flex:none}
@@ -2157,9 +2190,25 @@ a {
 @media(prefers-reduced-motion:reduce){.memory-add-cta{animation:none;transition:none}}
 .memory-welcome[open]{position:fixed;inset:0;margin:auto;height:fit-content;max-height:calc(100dvh - 32px);overflow:auto}
 .memory-welcome>small.memory-welcome-note{text-transform:none;letter-spacing:.01em;color:#7f9faf}
-
+/* Add-photo button: never hidden behind the memory panel (2026-11-27). Where the panel would cover it, the panel carries its own add button instead. */
+@media(max-width:1100px){.memory-panel-open .memory-add-cta{display:none!important}}
+.memory-view-add{width:100%;margin-top:10px}
+/* English date menus in the add-photo form (2026-11-27) */
+.compose-date{border:0;padding:0;margin:0;min-width:0}
+.compose-date legend{padding:0;margin-bottom:6px}
+.compose-date>div{display:grid;grid-template-columns:1fr 1.5fr 1fr auto;gap:8px;align-items:center}
+.compose-date>div:not(:has(.compose-date-clear)){grid-template-columns:1fr 1.5fr 1fr}
+.compose-date select{width:100%;min-width:0}
+.compose-date-clear{width:36px;height:36px;border-radius:50%;padding:0;display:grid;place-items:center;font-size:18px;line-height:1}
+.compose-date-note{display:block;margin-top:6px;color:#ffd08a}
+.compose-date select{height:46px;padding:0 30px 0 12px;border:1px solid #8bc9cb44;border-radius:10px;background:#091722 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%239fe9d9' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 11px center;color:#eaffff;font-size:16px;appearance:none;-webkit-appearance:none;color-scheme:dark;cursor:pointer}
+.compose-date select:focus{outline:none;border-color:#7ce5d4;box-shadow:0 0 0 3px #7ce5d419}
+.compose-date-clear{background:#ffffff14;color:#cfe;border:1px solid #8bc9cb33}
+.compose-date legend{font:inherit;font-size:13px;font-weight:600;color:inherit}
+.compose-date legend em{font-style:normal;font-size:11px;font-weight:400;color:#8fb6c5;margin-left:4px}
+.compose-date>div,.compose-date>div:not(:has(.compose-date-clear)){grid-template-columns:minmax(82px,1fr) minmax(0,1.5fr) minmax(62px,.85fr)}
+.compose-date>div:has(.compose-date-clear){grid-template-columns:minmax(82px,1fr) minmax(0,1.5fr) minmax(62px,.85fr) 32px}
+.compose-date select{padding:0 24px 0 10px;background-position:right 9px center}
+.compose-date-clear{width:32px;height:32px}
 a.memory-add-cta{text-decoration:none}
 .memory-welcome a.memory-welcome-go{display:flex;align-items:center;justify-content:center;width:100%;height:50px;border-radius:14px;text-decoration:none;font-size:16px;font-weight:700;color:#062433;background:linear-gradient(135deg,#8af2d8,#5cc9e0);box-sizing:border-box}
-/* Add-photo button: never hidden behind the memory panel (2026-11-27). Where the panel would cover it, the panel carries its own add link instead. */
-@media(max-width:1100px){.memory-panel-open .memory-add-cta{display:none!important}}
-.memory-view-add{display:flex;justify-content:center;align-items:center;width:100%;margin-top:10px;text-decoration:none}

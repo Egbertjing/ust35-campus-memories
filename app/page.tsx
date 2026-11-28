@@ -1,7 +1,10 @@
 'use client';
-import { asset } from '@/lib/base-path';
+import { asset } from '@/lib/base-path'
 import {CampusLightingControl} from '@/components/campus-lighting-control';
 import { CampusMemories } from '@/components/campus-memories';
+import { CampusMemoriesStatic } from '@/components/campus-memories-static';
+// GitHub Pages build (VITE_STATIC=1) is a read-only showcase; the Cloudflare build has uploads and moderation.
+const STATIC_SITE = import.meta.env.VITE_STATIC === '1';
 
 import { useCampusLanguage } from '@/components/campus-language';
 
@@ -674,6 +677,7 @@ export default function Home() {
           <div className="selection-card">
             <MapPin size={16} />
             <span>{t(selected)}</span>
+            {!STATIC_SITE && <button onClick={() => window.dispatchEvent(new CustomEvent('campus-memory-command', { detail: {action:'place', name:selected} }))}>＋ Add a photo here</button>}
             <button
               aria-label={t('关闭建筑名称')}
               onClick={() => setSelected(null)}
@@ -721,7 +725,7 @@ export default function Home() {
           <span className="mobile-hint">{t('单指旋转 · 双指缩放 / 平移')}</span>
         </footer>
       </div>
-      <CampusMemories ready={ready} places={ready ? (engine.current?.places ?? []).map(p=>({...p,name:t(p.name)})) : []} />
+      {STATIC_SITE ? <CampusMemoriesStatic ready={ready} places={ready ? (engine.current?.places ?? []).map(p=>({...p,name:t(p.name)})) : []} /> : <CampusMemories ready={ready} places={ready ? (engine.current?.places ?? []).map(p=>({...p,name:t(p.name)})) : []} />}
     </main>
   );
 }

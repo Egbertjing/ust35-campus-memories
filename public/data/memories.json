@@ -1,5 +1,18 @@
 [
  {
+  "id": "8fa7ae56-1bcf-4074-8f00-5f436d892cbd",
+  "title": "University Apartments Tower D",
+  "story": "",
+  "date": "2026-11-27",
+  "point": {
+   "x": 28.660038013607878,
+   "y": 135.65019252626453,
+   "z": -47.97991145390715,
+   "name": "University Apartments Tower D · Custom photo spot"
+  },
+  "photo": "memories/8fa7ae56-1bcf-4074-8f00-5f436d892cbd.jpg"
+ },
+ {
   "id": "233d9baf-5207-4979-88c3-b5f58c9dd87a",
   "title": "日晷广场",
   "story": "",

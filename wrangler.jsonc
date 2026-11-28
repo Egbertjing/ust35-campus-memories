@@ -1,0 +1,26 @@
+// Cloudflare Workers deployment (free plan): static site + /api backend.
+//   npm run build:cf && npx wrangler deploy
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "ust35-campus-memories",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"]
+  },
+  "d1_databases": [
+    { "binding": "DB", "database_name": "ust35-memories", "database_id": "be8c2696-c241-4d5e-890e-cd3c430f8ebd" }
+  ],
+  "kv_namespaces": [{ "binding": "PHOTOS", "id": "89a8b2b3dda04d80b52d97d596d4824e" }],
+  "vars": {
+    "UPLOAD_PER_IP": "20",
+    "UPLOAD_WINDOW": "600",
+    "UPLOAD_PER_IP_DAY": "80",
+    "UPLOAD_GLOBAL_DAY": "800",
+    "MAX_STORE_BYTES": "996147200"
+  },
+  "observability": { "enabled": true }
+}
