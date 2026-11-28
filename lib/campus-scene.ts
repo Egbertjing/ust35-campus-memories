@@ -1046,9 +1046,13 @@ export async function createCampusScene(
       invalidate();
     },
     async download() {
-      const response = await fetch(import.meta.env.VITE_MODEL_URL || asset('/hkust-clear-water-bay.glb'));
-      if (!response.ok) throw new Error('Model download failed');
-      const blob = await response.blob();
+      // The 31 MB model is stored in two parts: Cloudflare Workers serves files up to 25 MiB each.
+      const parts = await Promise.all(['part0', 'part1'].map(async part => {
+        const response = await fetch(asset(`/model/hkust-clear-water-bay.glb.${part}`));
+        if (!response.ok) throw new Error('Model download failed');
+        return response.blob();
+      }));
+      const blob = new Blob(parts, { type: 'model/gltf-binary' });
       const url = URL.createObjectURL(blob);
       const anchor = document.createElement('a');
       anchor.href = url;

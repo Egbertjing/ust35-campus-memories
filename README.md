@@ -2,10 +2,8 @@
 
 A 3D map of the HKUST Clear Water Bay campus where people pin their campus photos, built for the university's 35th anniversary.
 
-| Site | What it is |
-|---|---|
-| **https://ust35-campus-memories.ust35-campus-memories.workers.dev** | Main site on Cloudflare Workers (free plan): uploads, moderation, live photos |
-| https://egbertjing.github.io/ust35-campus-memories/ | Read-only showcase on GitHub Pages (photo snapshot); "Add your photo" opens the main site |
+**Site: https://ust35-campus-memories.ust35-campus-memories.workers.dev** (Cloudflare Workers, free plan).
+Everything runs on Cloudflare; this repository is the source code plus a photo snapshot for backup.
 
 ## How the main site works
 
@@ -21,8 +19,8 @@ Free-plan limits that matter: KV 1 GB storage and 1,000 writes per day, so the s
 (`UPLOAD_GLOBAL_DAY`) and storage at 950 MB (`MAX_STORE_BYTES`); per-network limits are 20 per 10 minutes and 80 per day.
 Photos are re-encoded in the browser to JPEG, max 2048 px, with location metadata removed.
 
-The 31 MB 3D model download is over the 25 MiB Workers file limit, so the download button fetches it from GitHub Pages
-(`.assetsignore` keeps it out of the Worker upload).
+The 31 MB 3D model is over the 25 MiB Workers file limit, so it is stored as two parts in `public/model/` and joined
+in the browser when someone presses download.
 
 ## Deploying
 
@@ -32,19 +30,11 @@ npx wrangler login            # once
 npm run deploy:cf             # build + deploy the main site to Cloudflare
 ```
 
-GitHub Pages (read-only showcase, `gh-pages` branch):
-
-```bash
-python3 scripts/sync-photo-snapshot.py   # copy current photos from the main site into public/
-npm run build:pages                       # VITE_STATIC=1, base /ust35-campus-memories/
-# then push dist/ to the gh-pages branch
-```
-
 ## Backups
 
 ```bash
 npx wrangler d1 export ust35-memories --remote --output backup.sql   # text, locations, history
-python3 scripts/sync-photo-snapshot.py                              # current photos into public/memories
+python3 scripts/sync-photo-snapshot.py                              # current photos into public/memories (commit them)
 ```
 
 ## Development

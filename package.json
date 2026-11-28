@@ -10,8 +10,7 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "test": "echo no tests configured",
-    "build:cf": "VITE_MODEL_URL=https://egbertjing.github.io/ust35-campus-memories/hkust-clear-water-bay.glb vite build && node -e \"require('fs').writeFileSync('dist/.assetsignore','hkust-clear-water-bay.glb\\n')\"",
-    "build:pages": "VITE_STATIC=1 BASE_PATH=/ust35-campus-memories/ vite build && touch dist/.nojekyll",
+    "build:cf": "vite build",
     "deploy:cf": "npm run build:cf && wrangler deploy"
   },
   "dependencies": {
